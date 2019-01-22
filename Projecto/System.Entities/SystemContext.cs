@@ -29,6 +29,8 @@ namespace System.Entities
 		public DbSet<Vista> Vista { set; get; }
 		public DbSet<UsuarioToken> UsuarioToken { set; get; }
         public DbSet<Producto> Producto { get; set; }
+        public DbSet<Categoria> Categoria { get; set; }
+        public DbSet<Marca> Marca { get; set; }
 		
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -45,6 +47,13 @@ namespace System.Entities
            .HasQueryFilter(usuario => EF.Property<bool>(usuario, "Habilitado") == true);
 
             //Relationships
+
+            modelBuilder.Entity<Producto>()
+                .HasOne(e => e.Categoria)
+                .WithMany(c => c.Productos);
+            modelBuilder.Entity<Producto>()
+                .HasOne(e => e.Marca)
+                .WithMany(c => c.Productos);
 
             //rol-permiso
             modelBuilder.Entity<RolPermiso>()

@@ -146,6 +146,30 @@ namespace System.Entities
                 return productoRepository;
             }
         }
+        private Repository<Categoria> categoriaRepository;
+        public IRepository<Categoria> CategoriaRepository
+        {
+            get
+            {
+                if (this.categoriaRepository == null)
+                {
+                    this.categoriaRepository = new Repository<Categoria>(context);
+                }
+                return categoriaRepository;
+            }
+        }
+        private Repository<Marca> marcaRepository;
+        public IRepository<Marca> MarcaRepository
+        {
+            get
+            {
+                if (this.marcaRepository == null)
+                {
+                    this.marcaRepository = new Repository<Marca>(context);
+                }
+                return marcaRepository;
+            }
+        }
 			
         public int Save()
 		{
