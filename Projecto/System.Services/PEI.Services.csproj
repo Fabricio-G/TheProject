@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Class1.cs" />
+    <Compile Remove="Service.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Decidir\Decidir.csproj" />
+    <ProjectReference Include="..\PEI.Entities\PEI.Entities.csproj" />
+    <ProjectReference Include="..\PEI.Helper\PEI.Helper.csproj" />
+    <ProjectReference Include="..\Pei\Pei.csproj" />
+  </ItemGroup>
+
+</Project>

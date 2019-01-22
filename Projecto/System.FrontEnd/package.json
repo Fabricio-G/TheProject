@@ -1,0 +1,21 @@
+{
+  "version": "1.0.0",
+  "name": "uva-frontend",
+  "private": true,
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.7.0",
+    "gulp-concat": "2.6.0",
+    "gulp-cssmin": "^0.2.0",
+    "gulp-rename": "1.2.2"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "fs": "0.0.1-security",
+    "gulp-cheerio": "^0.6.3",
+    "gulp-util": "^3.0.8",
+    "path": "^0.12.7",
+    "request": "^2.87.0",
+    "vinyl-source-stream": "^2.0.0"
+  }
+}
