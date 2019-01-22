@@ -1,0 +1,221 @@
+﻿@using NonFactors.Mvc.Grid
+@model List<System.Services.Models.AuditoriaModel>
+@{
+    ViewData["Title"] = "Auditoría";
+}
+<link href="~/css/PrettyJson/pretty-json.css" rel="stylesheet" />
+<style>
+
+    .loader-table {
+        width: 100%;
+        position: initial;
+        opacity: 0.5;
+    }
+
+    .resizeCol {
+        width: 60%;
+    }
+
+    .export-btn {
+        border-radius: 16px;
+    }
+</style>
+<header class="content__title">
+    <h1>@ViewData["Title"]</h1>
+</header>
+
+<div class="card">
+    <div id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="card-header" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordionGeneral" href="#collapseGeneral" aria-expanded="true" aria-controls="collapseGeneral" style="cursor: pointer;">
+            <h3 class="card-title">Filtros&nbsp;&nbsp;<i class="icon zmdi zmdi-chevron-up zmdi-hc-lg"></i></h3>
+        </div>
+        <div id="collapseGeneral" class="collapse show" role="tabpanel" aria-labelledby="headingGeneral">
+            <div class="card-block">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="user-filtro">Usuario</label>
+                            <input type="text" id="user-filtro" placeholder="dominio\userName" class="form-control input-filtro">
+                            <i class="form-group__bar"></i>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="entity-filtro">Tabla</label>
+                            <input type="text" id="entity-filtro" placeholder="Ej.: Usuario" class="form-control input-filtro">
+                            <i class="form-group__bar"></i>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="action-filtro">Acción</label>
+                            <input type="text" id="action-filtro" placeholder="[Insert, Update, Delete]" class="form-control input-filtro">
+                            <i class="form-group__bar"></i>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="description-filtro">Descripción</label>
+                            <input type="text" id="description-filtro" placeholder="Texto aquí" class="form-control input-filtro">
+                            <i class="form-group__bar"></i>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="date-filtro">Rango de fechas</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="zmdi zmdi-calendar"></i></span>
+                                <div class="form-group">
+                                    <input class="form-control flatpickr-input input-filtro fecha" id="date-filtro" placeholder="Click aquí" type="text" readonly="readonly">
+                                    <input type="hidden" name="DateFrom" class="input-filtro" id="datefrom" readonly />
+                                    <input type="hidden" name="DateTo" class="input-filtro" id="dateto" readonly />
+                                    <i class="form-group__bar"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="col-auto float-right">
+                        <a id="btn-clean" onclick="borrarFiltro(this)" class="btn btn-danger btn--icon-text waves-effect text-white">
+                            <i class="zmdi zmdi-close"></i>
+                            Borrar
+                        </a>
+                        <a id="btn-filter" onclick="filtrar(this)" class="btn btn-dark btn--icon-text waves-effect text-white">
+                            <i class="zmdi zmdi-filter-list"></i>
+                            Filtrar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-block">
+        <div class="row">
+            <div id="grid-content" class="col-md-12">
+                <button class="btn btn-primary btn--icon-text waves-effect text-white float-right export-btn" onclick="exportToExcel()"><i class="fa fa-file-excel fa-lg"></i> Exportar</button>
+                <div id="loading">
+                    <br><i class='zmdi-hc-li zmdi zmdi-refresh zmdi-hc-spin zmdi-hc-3x loader-table'></i>
+                </div>
+                @Html.AjaxGrid(Url.Action("AuditoriaGrid", "Auditoria"))
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+<script>
+
+    function exportToExcel() {
+
+        $('.export-btn').html("<i class='zmdi zmdi-spinner fa-spin'></i> Exportando...");
+        $('.export-btn').prop('disabled', true)
+
+        window.location = '@Url.Action("AuditoriaExportList", "Auditoria")' + '?UserName=' + $("#user-filtro").val() + '&Entity=' + $("#entity-filtro").val() + '&DateFrom=' + $("#datefrom").val() + '&DateTo=' + $("#dateto").val() + '&ActionChange=' + $("#action-filtro").val() + '&Description=' + $("#description-filtro").val();
+
+        setTimeout(function () {
+            $('.export-btn').html("<i class='fa fa-file-excel fa-lg'></i> Exportar");
+            $('.export-btn').prop('disabled', false)
+        }, 5000);
+    }
+
+
+    $('#collapseGeneral').on('shown.bs.collapse', function () {
+        $(".icon").addClass('zmdi-chevron-up').removeClass('zmdi-chevron-down');
+    });
+
+    $('#collapseGeneral').on('hidden.bs.collapse', function () {
+        $(".icon").addClass('zmdi-chevron-down').removeClass('zmdi-chevron-up');
+    });
+
+    $(document).ready(function () {
+
+        $("#loading").show();
+
+        $(".input-filtro").keypress(function (event) {
+            if (event.which == 13) {
+                event.preventDefault();
+                filtrar($("#btn-filter"));
+            }
+        });
+
+        $(".fecha").flatpickr({
+                dateFormat: "d-m-Y",
+                maxDate: '@DateTime.Now.ToString("dd/MM/yyyy")',
+                locale: {
+                    weekdays: {
+                        shorthand: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                        longhand: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
+                    },
+                    months: {
+                        shorthand: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nob', 'Dic'],
+                        longhand: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                    },
+                },
+                mode: 'range',
+                onChange: function (selectedDates, dateStr, instance) {
+                    var fechaInicio = null;
+                    var fechaFin = null;
+                    if (selectedDates[0]) {
+                        fechaInicio = numeroAdosCaracteres(selectedDates[0].getDate()) + "/" + numeroAdosCaracteres(selectedDates[0].getMonth() + 1) + "/" + selectedDates[0].getFullYear();
+                    }
+                    if (selectedDates[1]) {
+                        fechaFin = numeroAdosCaracteres(selectedDates[1].getDate()) + "/" + numeroAdosCaracteres(selectedDates[1].getMonth() + 1) + "/" + selectedDates[1].getFullYear();
+                    }
+                    $('#datefrom').val(fechaInicio);
+                    $('#dateto').val(fechaFin);
+                },
+            });
+
+            //Método auxiliar para formatear dias y meses de un solo dígito en flatpickr:
+            function numeroAdosCaracteres(fecha) {
+                if (fecha > 9) {
+                    return "" + fecha;
+                } else {
+                    return "0" + fecha;
+                }
+            }
+
+        });
+
+        function filtrar(btn) {
+            reloadGrid(btn, "<i class='zmdi zmdi-filter-list'></i> Filtrar");
+        }
+        function borrarFiltro(btn) {
+
+            //Reiniciamos Datepicker...
+            $(".flatpickr-day").removeClass("selected");
+            $(".flatpickr-day").removeClass("startRange");
+            $(".flatpickr-day").removeClass("endRange");
+            $('#datefrom').val("");
+            $('#dateto').val("");
+            //------//
+
+            $(".input-filtro").val(null).removeClass("form-control--active");
+            reloadGrid(btn, "<i class='zmdi zmdi-close'></i> Borrar");
+        }
+        function reloadGrid(btn, text) {
+
+            $('.mvc-grid').mvcgrid({
+                requestType: 'get',
+                query: 'UserName=' + $("#user-filtro").val() + '&Entity=' + $("#entity-filtro").val() + '&DateFrom=' + $("#datefrom").val() + '&DateTo=' + $("#dateto").val() + '&ActionChange=' + $("#action-filtro").val() + '&Description=' + $("#description-filtro").val(),
+                reloadStarted: function () {
+                    //$(".mvc-grid").html("<br><i class='zmdi-hc-li zmdi zmdi-refresh zmdi-hc-spin zmdi-hc-3x loader-table'></i>");
+                    $('.export-btn').prop('disabled', true)
+                    $("#btn-clean, #btn-filter").addClass("disabled");
+                    $("#btn-filter").html("<i class='zmdi zmdi-spinner fa-spin'></i> Procesando");
+                },
+                reloadEnded: function () {
+                    $('.export-btn').prop('disabled', false)
+                    $("#btn-clean, #btn-filter").removeClass("disabled");
+                    $("#btn-filter").html("<i class='zmdi zmdi-filter-list'></i> Filtrar");
+                },
+                showLoading: true,
+                reload: true
+            });
+        }
+</script>
+}

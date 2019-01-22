@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewData["Title"] = "Pagina no disponible";
+    var topic = (string)ViewBag.Motivo;
+}
+<style>
+    .card {
+        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */
+    }
+
+    body {
+        background-color: grey;
+    } 
+</style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+@if (topic == "linkExpirado")
+{
+    <div class="container pt-5">
+        <div class="row">
+            <div class="container-fluid">
+                <div class="card" id="card1">
+                    <div class="card-header">
+                        <p class="text-center pt-3" >
+                            <img src="~/public/logo-pluspagos.png" alt="PlusPagos" class="img-logo-pluspagos" width="150px;"/>
+                        </p>
+                    </div>
+                    <div class="card-block  text-center pt-5">
+                        <p class="col-md-12">El link de pago solicitado ha expirado. Solicite uno nuevo.</p>
+                        <p><br /></p>
+                        <p>Para mayor información, contáctese con <strong>@ViewBag.MailSoporte</strong></p>
+
+                    </div>
+                    <p class="text-center" style="color: gray">
+                        <br />
+                        <small>© @System.DateTime.Now.Year.ToString() Todos los derechos reservados</small>
+                    </p>
+
+                </div>
+                </div>
+            </div>
+        </div>
+}
+else
+{
+    <div class="container pt-5">
+        <div class="row">
+            <div class="container-fluid">
+                <div class="card" id="card1">
+                    <div class="card-header">
+                        <p class="text-center pt-3">
+                            <img src="~/public/logo-pluspagos.png" alt="PlusPagos" class="img-logo-pluspagos" width="150px;" />
+                        </p>
+                    </div>
+                    <div class="card-block  text-center pt-5">
+                        <p class="col-md-12">El link de pago solicitado ya ha sido pagado. Gracias por utilizar nuestros servicios.</p>
+                    </div>
+                    <p class="text-center" style="color: gray">
+                        <br />
+                        <small>© @System.DateTime.Now.Year.ToString() Todos los derechos reservados</small>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}

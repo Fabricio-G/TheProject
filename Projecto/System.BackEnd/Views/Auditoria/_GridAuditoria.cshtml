@@ -1,0 +1,83 @@
+﻿@using NonFactors.Mvc.Grid
+@model System.Services.Models.GridAuditoriaModel
+
+@(Html.Grid(Model.AuditoriaList)
+                    .Build(columns =>
+                    {
+                        columns.Add(m => m.Fecha)
+                                .RenderedAs(m => m.Fecha.ToString("dd/MM/yyyy HH:mm") + "hs.")
+                                .Titled("Fecha");
+                        columns.Add(m => m.UserName)
+                                .Titled("Usuario");
+                        columns.Add(m => m.Entity)
+                                .RenderedAs(m => m.Entity + (m.EntityId != null ? " [ID " + m.EntityId + "] - " : ""))
+                                .Titled("Tabla");
+                        columns.Add(m => m.Action)
+                                .Titled("Acción");
+                        columns.Add(m => m.Descripcion)
+                                .RenderedAs(m => $"<div><span data-toggle='collapse' data-target='#target-" + m.AuditoriaId + "' style='cursor: pointer;'>" + m.Descripcion + "</span><a class='float-right' title='Ver Detalle' style='margin-left:20%; margin-right:15px;' data-toggle='collapse' data-target='#target-" + m.AuditoriaId + "'><i id='icon-" + m.AuditoriaId + "' class='zmdi zmdi-chevron-down' style='font-size: 15px'></i></a><div id='target-" + m.AuditoriaId + "' icon-id='icon-" + m.AuditoriaId + "' class='collapse class-collapse'><br><div id='content-data-" + m.AuditoriaId + "'></div></div></div>")
+                                .Encoded(false)
+                                .Css("resizeCol")
+                                .Titled("Descripción");
+                    })
+                    .Pageable(pager =>
+                    {
+                        pager.ProcessorType = GridProcessorType.Manual;
+                        pager.RowsPerPage = AppSettings.Value.Paging.RowsPerPage;
+                        pager.TotalRows = Model.TotalRows;
+                    })
+                    .Empty("No se encontró ningún registro")
+                    .Css("table table-hover")
+      .Sortable()
+)
+
+<script>
+    $(document).ready(function () {
+        $('.class-collapse').on('shown.bs.collapse', function () {
+            $("#" + $(this).attr("icon-id")).addClass('zmdi-chevron-up').removeClass('zmdi-chevron-down');
+
+        });
+
+        $('.class-collapse').on('hidden.bs.collapse', function () {
+            $("#" + $(this).attr("icon-id")).addClass('zmdi-chevron-down').removeClass('zmdi-chevron-up');
+        });
+
+        $('[title]').tooltip();
+
+        $('.zmdi-chevron-down').click(function (event) {
+            var target = event.target.id;
+            var id = target.replace("icon-", "");
+            GetAuditoriaById(id);
+        });
+
+        function GetAuditoriaById(id) {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetAuditoriaJson", "Auditoria")?id=' + id,
+                contentType: "application/json",
+                dataType: "json",
+                success: function (data) {
+                    var json = data.value.replace(/(\r\n|\n|\r)/gm, "");
+                    try {
+                            var node = new PrettyJSON.view.Node({
+                                el: $('#content-data-' + data.auditoriaId),
+                                data: JSON.parse(json),
+                                dateFormat: "DD/MM/YYYY - HH24:MI"
+                            }).expandAll();
+                        }
+                    catch (err) {
+                            var node = new PrettyJSON.view.Node({
+                                el: $('#content-data-' + data.auditoriaId),
+                                data: JSON.parse('{"ERROR": "Problemas al leer JSON"}'),
+                                dateFormat: "DD/MM/YYYY - HH24:MI"
+                            }).expandAll();
+                        }
+                },
+                error: function (xhr, ajaxOptions, error) {
+                }
+            });
+        }
+
+        $("#loading").hide();
+    });
+</script>
