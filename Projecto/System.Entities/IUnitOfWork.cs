@@ -19,6 +19,8 @@ namespace System.Entities
         IRepository<UsuarioRol> UsuarioRolRepository {get;}
 		IRepository<Vista> VistaRepository {get;}
         IRepository<Producto> ProductoRepository { get; }
+        IRepository<Categoria> CategoriaRepository { get; }
+        IRepository<Marca> MarcaRepository { get; }
 				int Save();
 	}
 }

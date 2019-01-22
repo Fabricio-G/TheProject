@@ -15,7 +15,9 @@ namespace System.Entities
         public string Estado { get; set; }
         public string Imagen { get; set; }
         public string BreveDescripcion { get; set; }
-        public string Categoria { get; set; }
-        public string Marca { get; set; }
+        public int CategoriaId { get; set; }
+        public int MarcaId { get; set; }
+        public virtual Categoria Categoria { get; set; }
+        public virtual Marca Marca { get; set; }
     }
 }

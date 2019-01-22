@@ -54,6 +54,30 @@ namespace System.Entities.Migrations
                     b.ToTable("Auditoria");
                 });
 
+            modelBuilder.Entity("System.Entities.Categoria", b =>
+                {
+                    b.Property<int>("CategoriaId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Nombre");
+
+                    b.HasKey("CategoriaId");
+
+                    b.ToTable("Categoria");
+                });
+
+            modelBuilder.Entity("System.Entities.Marca", b =>
+                {
+                    b.Property<int>("MarcaId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Nombre");
+
+                    b.HasKey("MarcaId");
+
+                    b.ToTable("Marca");
+                });
+
             modelBuilder.Entity("System.Entities.Parametro", b =>
                 {
                     b.Property<int>("ParametroId")
@@ -99,7 +123,7 @@ namespace System.Entities.Migrations
 
                     b.Property<int>("Cantidad");
 
-                    b.Property<string>("Categoria");
+                    b.Property<int>("CategoriaId");
 
                     b.Property<int>("Codigo");
 
@@ -107,13 +131,17 @@ namespace System.Entities.Migrations
 
                     b.Property<string>("Imagen");
 
-                    b.Property<string>("Marca");
+                    b.Property<int>("MarcaId");
 
                     b.Property<string>("Nombre");
 
                     b.Property<int>("Precio");
 
                     b.HasKey("ProductoId");
+
+                    b.HasIndex("CategoriaId");
+
+                    b.HasIndex("MarcaId");
 
                     b.ToTable("Producto");
                 });
@@ -223,6 +251,19 @@ namespace System.Entities.Migrations
                     b.HasOne("System.Entities.Vista", "Vista")
                         .WithMany("Permisos")
                         .HasForeignKey("VistaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("System.Entities.Producto", b =>
+                {
+                    b.HasOne("System.Entities.Categoria", "Categoria")
+                        .WithMany("Productos")
+                        .HasForeignKey("CategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("System.Entities.Marca", "Marca")
+                        .WithMany("Productos")
+                        .HasForeignKey("MarcaId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
