@@ -12,6 +12,8 @@
                 <br />
                 <li class="@Html.IsActive("Parametro")">@Html.ActionMenuRole("Parámetros", "zmdi zmdi-settings", "Index", "Parametro", Email)</li>
                 <li class="@Html.IsActive("Auditoria")">@Html.ActionMenuRole("Auditoría", "zmdi zmdi-file", "Index", "Auditoria", Email)</li>
+                <li class="@Html.IsActive("Productos")">@Html.ActionMenuRole("Productos", "zmdi zmdi-store", "Index", "Productos", Email)</li>
+
                 @if (Html.VerifyAccess(Email, "Index", "Usuario") || Html.VerifyAccess(Email, "Index", "Perfil"))
                 {
                     <li class="navigation__sub  @Html.IsActive("Perfil", IsGroup: true) @Html.IsActive("Usuario", IsGroup: true)">
