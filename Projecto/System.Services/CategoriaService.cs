@@ -27,5 +27,40 @@ namespace System.Services
             }
             return categoria;
         }
+        public CategoriaViewModel GetById(int id)
+        {
+            var model = _uow.CategoriaRepository.Find(x => x.CategoriaId == id);
+            var categoria = new CategoriaViewModel()
+            {
+                CategoriaId = model.CategoriaId,
+                Nombre = model.Nombre
+            };
+            return categoria;
+        }
+
+        public void Create(CategoriaViewModel model)
+        {
+            var categoria = new Categoria()
+            {
+                Nombre = model.Nombre
+            };
+            _uow.CategoriaRepository.Create(categoria);
+            _uow.CategoriaRepository.Save();
+        }
+
+        public void Edit(CategoriaViewModel model)
+        {
+            var categoria = _uow.CategoriaRepository.Find(x => x.CategoriaId == model.CategoriaId);
+            categoria.Nombre = model.Nombre;
+            _uow.CategoriaRepository.Update(categoria);
+            _uow.CategoriaRepository.Save();
+        }
+
+        public void Delete(int categoriaId)
+        {
+            var categoria = _uow.CategoriaRepository.Find(x => x.CategoriaId == categoriaId);
+            _uow.CategoriaRepository.Delete(categoria);
+            _uow.CategoriaRepository.Save();
+        }
     }
 }
