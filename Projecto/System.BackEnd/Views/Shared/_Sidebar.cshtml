@@ -7,12 +7,12 @@
         <div class="scrollbar-inner scroll-content d-flex h-100 flex-column" style="height: auto; margin-bottom: 0px; margin-right: 0px; max-height: 800.5px;">
             <ul class="navigation">
                 <li class="@Html.IsActive("Home")">@Html.ActionMenuRole("Dashboard", "zmdi zmdi-chart", "Index", "Home", Email)</li>
+                <li class="@Html.IsActive("Producto")">@Html.ActionMenuRole("Producto", "zmdi zmdi-store", "Index", "Producto", Email)</li>
                 <br />
                 <li>Configuración</li>
                 <br />
                 <li class="@Html.IsActive("Parametro")">@Html.ActionMenuRole("Parámetros", "zmdi zmdi-settings", "Index", "Parametro", Email)</li>
                 <li class="@Html.IsActive("Auditoria")">@Html.ActionMenuRole("Auditoría", "zmdi zmdi-file", "Index", "Auditoria", Email)</li>
-                <li class="@Html.IsActive("Productos")">@Html.ActionMenuRole("Productos", "zmdi zmdi-store", "Index", "Productos", Email)</li>
 
                 @if (Html.VerifyAccess(Email, "Index", "Usuario") || Html.VerifyAccess(Email, "Index", "Perfil"))
                 {

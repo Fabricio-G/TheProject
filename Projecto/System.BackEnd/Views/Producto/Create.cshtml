@@ -1,0 +1,53 @@
+﻿@using System.Backend.Models
+@using System.Services.Models
+@model System.Services.Models.ProductoViewModel
+@{
+    ViewBag.Title = "Nuevo Producto";
+}
+<link href="~/css/rol_style.css" rel="stylesheet" />
+<header class="content__title">
+    <h1>@ViewBag.Title</h1>
+    <div class="actions">
+        <a href="@Url.Action("Index", "Producto")" class="actions__item zmdi zmdi-arrow-left text-danger" title="Volver"></a>
+    </div>
+</header>
+@using (Html.BeginForm("Create", "Producto", FormMethod.Post, new { role = "form" }))
+{
+    <div class="card">
+        <div class="card-block">
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.ValidationMessageFor(model => model.Nombre, null, new { @class = "text-danger" })
+                    <div class="form-group form-group--float">
+                        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control" })
+                        <label>Nombre</label>
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-end">
+        <div class="col-auto">
+            <button type="submit" id="#submit-btn" class="btn btn-primary btn--icon-text waves-effect text-white btn-loading">
+                <i class="zmdi zmdi-save"></i>
+                Guardar
+            </button>
+        </div>
+    </div>
+}
+@section Scripts
+    {
+    <script>
+    $("#submit-btn").click(function (event) {
+        event.preventDefault();
+        if ($('form').valid()) {
+            $("#submit-btn").html("<i class='zmdi zmdi-spinner fa-spin'></i> Procesando...");
+            $("#submit-btn").addClass("disabled");
+            document.getElementById("submit-btn").style.pointerEvents = "none";
+            $('form').submit();
+        }
+      });
+    </script>
+}
