@@ -103,5 +103,11 @@ namespace System.Backend.Controllers
                 return BadRequest("Ocurrio un error al eliminar la marca");
             }
         }
+        public IActionResult ValidarMarca (string nombre)
+        {
+            MarcaService marcaService = new MarcaService(_logger);
+            var exist = marcaService.ValidarMarca(nombre);
+            return Json(exist);
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Entities;
+using System.Linq;
 using System.Services.Models;
 using System.Text;
 
@@ -61,6 +62,10 @@ namespace System.Services
             var categoria = _uow.CategoriaRepository.Find(x => x.CategoriaId == categoriaId);
             _uow.CategoriaRepository.Delete(categoria);
             _uow.CategoriaRepository.Save();
+        }
+        public bool ValidarCategoria (string nombre)
+        {
+            return _uow.CategoriaRepository.All().Any(x => x.Nombre == nombre);
         }
     }
 }

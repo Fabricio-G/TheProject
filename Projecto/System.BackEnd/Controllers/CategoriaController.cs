@@ -103,5 +103,11 @@ namespace System.Backend.Controllers
                 return BadRequest("Ocurrio un error al eliminar la Categoria");
             }
         }
+        public IActionResult ValidarCategoria(string nombre)
+        {
+            CategoriaService marcaService = new CategoriaService(_logger);
+            var exist = marcaService.ValidarCategoria(nombre);
+            return Json(exist);
+        }
     }
 }

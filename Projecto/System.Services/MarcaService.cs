@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Entities;
+using System.Linq;
 using System.Services.Models;
 using System.Text;
 
@@ -62,6 +63,10 @@ namespace System.Services
             var marca = _uow.MarcaRepository.Find(x => x.MarcaId == marcaId);
             _uow.MarcaRepository.Delete(marca);
             _uow.MarcaRepository.Save();
+        }
+        public bool ValidarMarca (string nombre)
+        {
+            return _uow.MarcaRepository.All().Any(x => x.Nombre == nombre);
         }
     }
 }

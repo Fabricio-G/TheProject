@@ -170,7 +170,6 @@ namespace System.Entities
                 return marcaRepository;
             }
         }
-			
         public int Save()
 		{
 			return context.SaveChanges();
