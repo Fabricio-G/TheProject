@@ -23,7 +23,7 @@
                         <label>Nombre</label>
                         <i class="form-group__bar"></i>
                     </div>
-                    @Html.ValidationMessageFor(model => model.Nombre, null, new { @class = "text-danger" })
+                    <span asp-validation-for="Nombre" id="text-nombre-error" class="text-danger"></span>
                 </div>
             </div>
         </div>
@@ -37,16 +37,50 @@
         </div>
     </div>
 </form>
-
+<div class="modal fade" id="modal-default" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content" style="border-radius: 0px !important;">
+            <div class="modal-header" style="background-color:white !important;border-top-left-radius:0px !important;border-top-right-radius:0px !important;">
+                <h5 class="modal-title pull-left" style="color: black">AVISO</h5>
+            </div>
+            <div class="modal-body">
+                El nombre de la marca:  <b><span id="i-marca"></span></b> ya existe.
+            </div>
+            <div class="modal-footer" style="border-bottom-right-radius:0px !important;border-bottom-left-radius:0px !important;">
+                <button type="button" class="btn btn-link" onclick="CleanInput();" data-dismiss="modal">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     $("#submit-btn").click(function (event) {
         event.preventDefault();
-        if ($("#CreateMarcaForm").valid()) {
-            alert("ASD")
+        if ($("#CreateMarcaForm").valid() && !exist) {
+            alert(existMarca)
             $("#submit-btn").html("<i class='zmdi zmdi-spinner fa-spin'></i> Procesando...");
             $("#submit-btn").addClass("disabled");
             document.getElementById("submit-btn").style.pointerEvents = "none";
             $("#CreateMarcaForm").submit();
         }
-      });
+    });
+    $("#Nombre").keyup(function () {
+        $.ajax({
+            url: '@Url.Action("ValidarMarca", "Marca")',
+            data: { nombre: $("#Nombre").val() },
+            success: function (msj) {
+                if (msj == true) {
+                    $("#i-marca").text($("#Nombre").val());
+                    $('#modal-default').modal({
+                        backdrop: 'static',
+                        keyboard: false
+                    });
+                    event.preventDefault();
+                }
+            }
+        });
+    });
+    function CleanInput() {
+        $("#Nombre").removeClass("form-control--active");
+        $("#Nombre").val("");
+    }
 </script>

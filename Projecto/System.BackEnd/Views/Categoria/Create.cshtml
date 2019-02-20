@@ -36,6 +36,21 @@
         </div>
     </div>
 </form>
+<div class="modal fade" id="modal-default" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content" style="border-radius: 0px !important;">
+            <div class="modal-header" style="background-color:white !important;border-top-left-radius:0px !important;border-top-right-radius:0px !important;">
+                <h5 class="modal-title pull-left" style="color: black">AVISO</h5>
+            </div>
+            <div class="modal-body">
+                El nombre de la categoria:  <b><span id="i-marca"></span></b> ya existe.
+            </div>
+            <div class="modal-footer" style="border-bottom-right-radius:0px !important;border-bottom-left-radius:0px !important;">
+                <button type="button" class="btn btn-link" onclick="CleanInput();" data-dismiss="modal">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     $("#submit-btn").click(function (event) {
         event.preventDefault();
@@ -46,4 +61,24 @@
             $("#CreateCategoriaForm").submit();
         }
     });
+    $("#Nombre").keyup(function () {
+        $.ajax({
+            url: '@Url.Action("ValidarCategoria", "Categoria")',
+            data: { nombre: $("#Nombre").val() },
+            success: function (msj) {
+                if (msj == true) {
+                    $("#i-marca").text($("#Nombre").val());
+                    $('#modal-default').modal({
+                        backdrop: 'static',
+                        keyboard: false
+                    });
+                    event.preventDefault();
+                }
+            }
+        });
+    });
+    function CleanInput() {
+        $("#Nombre").removeClass("form-control--active");
+        $("#Nombre").val("");
+    }
 </script>
