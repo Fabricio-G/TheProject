@@ -4,9 +4,9 @@ using System.Text;
 
 namespace System.Services.Models
 {
-    public class ProductosModel
+    public class ProductoViewModel
     {
-        public int ProductosId { get; set; }
+        public int ProductoId { get; set; }
         public string Nombre { get; set; }
 
     }

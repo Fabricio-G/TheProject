@@ -9,12 +9,12 @@
                 <li class="@Html.IsActive("Home")">@Html.ActionMenuRole("Dashboard", "zmdi zmdi-chart", "Index", "Home", Email)</li>
                 <li class="@Html.IsActive("Categorias")">@Html.ActionMenuRole("Categorias", "zmdi zmdi-chart", "Index", "Categoria", Email)</li>
                 <li class="@Html.IsActive("Marca")">@Html.ActionMenuRole("Marca", "zmdi zmdi-bookmark", "Index", "Marca", Email)</li>
+                <li class="@Html.IsActive("Producto")">@Html.ActionMenuRole("Producto", "zmdi zmdi-store", "Index", "Producto", Email)</li>
                 <br />
                 <li>Configuración</li>
                 <br />
                 <li class="@Html.IsActive("Parametro")">@Html.ActionMenuRole("Parámetros", "zmdi zmdi-settings", "Index", "Parametro", Email)</li>
                 <li class="@Html.IsActive("Auditoria")">@Html.ActionMenuRole("Auditoría", "zmdi zmdi-file", "Index", "Auditoria", Email)</li>
-                <li class="@Html.IsActive("Productos")">@Html.ActionMenuRole("Productos", "zmdi zmdi-store", "Index", "Productos", Email)</li>
 
                 @if (Html.VerifyAccess(Email, "Index", "Usuario") || Html.VerifyAccess(Email, "Index", "Perfil"))
                 {
