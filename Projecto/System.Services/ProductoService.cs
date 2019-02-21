@@ -23,7 +23,7 @@ namespace System.Services
             var producto = new List<ProductoModel>();
             foreach (var value in model)
             {
-                producto.Add(new ProductoModel { ProductoId = value.ProductoId, Nombre = value.Nombre, Descripcion = value.Descripcion });
+                producto.Add(new ProductoModel { ProductoId = value.ProductoId, Nombre = value.Nombre, BreveDescripcion = value.BreveDescripcion, Precio = value.Precio, Estado =value.Estado });
             }
             return producto;
         }
@@ -31,7 +31,15 @@ namespace System.Services
         {
             var producto = new Producto()
             {
-                Nombre = model.Nombre
+                Nombre = model.Nombre,
+                CategoriaId = model.CategoriaId,
+                MarcaId = model.MarcaId,
+                BreveDescripcion = model.BreveDescripcion,
+                Cantidad = model.Cantidad,
+                Codigo = model.Codigo,
+                Estado = model.Estado,
+                Descripcion = model.Descripcion,
+                Precio = model.Precio
             };
             _uow.ProductoRepository.Create(producto);
             _uow.ProductoRepository.Save();

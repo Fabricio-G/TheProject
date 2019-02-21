@@ -1,7 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Entities;
+using System.Linq;
 using System.Services.Models;
 using System.Text;
 
@@ -62,5 +64,19 @@ namespace System.Services
             _uow.CategoriaRepository.Delete(categoria);
             _uow.CategoriaRepository.Save();
         }
+        public IEnumerable<SelectListItem> GetCategoriaDropDown(string selectedId = null)
+        {
+            var categoria = _uow.CategoriaRepository.All().OrderBy(x => x.Nombre).ToList();
+
+            var listCategoria = categoria.Select(x => new SelectListItem()
+            {
+                Selected = (x.CategoriaId.ToString() == selectedId),
+                Text = x.Nombre,
+                Value = x.CategoriaId.ToString()
+            }).OrderBy(x => x.Text);
+
+            return listCategoria;
+        }
+
     }
 }
