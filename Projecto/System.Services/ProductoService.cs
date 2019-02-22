@@ -44,6 +44,13 @@ namespace System.Services
             _uow.ProductoRepository.Create(producto);
             _uow.ProductoRepository.Save();
         }
+        public void Delete(int productoId)
+        {
+            var producto = _uow.ProductoRepository.Find(x => x.ProductoId == productoId);
+            _uow.ProductoRepository.Delete(producto);
+            _uow.ProductoRepository.Save();
+        }
+
 
     }
 }

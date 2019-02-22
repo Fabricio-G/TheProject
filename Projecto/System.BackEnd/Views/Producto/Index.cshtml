@@ -32,8 +32,8 @@
                                 columns.Add(m => m.Estado == "0" ? "SIN STOCK" : "EN STOCK").Titled("Estado");
                                 columns.Add(m => m.BreveDescripcion).Titled("Breve Descripcion");
                                 columns.Add(m => "$" + m.Precio).Titled("Precio");
-                                columns.Add(m => Html.ActionLink("", "Edit", "Productos", new { Id = m.ProductoId }, new { @class = "zmdi zmdi-edit text-warning", @title = "Editar" })).Css("action-cell " + edit).Titled("Editar");
-                                columns.Add(m => Html.ActionLink("", "Delete", "Productos", new { Id = m.ProductoId }, new { @class = "zmdi zmdi-delete text-danger swal-delete", @title = "Eliminar" })).Css("action-cell " + delete).Titled("Eliminar");
+                                columns.Add(m => Html.ActionLink("", "Edit", "Producto", new { Id = m.ProductoId }, new { @class = "zmdi zmdi-edit text-warning", @title = "Editar" })).Css("action-cell " + edit).Titled("Editar");
+                                columns.Add(m => Html.ActionLink("", "Delete", "Producto", new { Id = m.ProductoId }, new { @class = "zmdi zmdi-delete text-danger swal-delete", @title = "Eliminar" })).Css("action-cell " + delete).Titled("Eliminar");
                             })
                             .Empty("No se encontró ningún registro")
                             .Css("table table-hover")

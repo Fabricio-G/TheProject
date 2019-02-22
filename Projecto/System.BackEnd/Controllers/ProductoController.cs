@@ -45,6 +45,22 @@ namespace System.Backend.Controllers
             SetTempData("Producto Creada.");
             return RedirectToAction("Index");
         }
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                ProductoService productoService = new ProductoService(_logger);
+                productoService.Delete(id);
+                SetTempData("Marca Eliminada.");
+                _logger.LogInformation("Marca eliminada correctamente");
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("No se pudo eliminar la marca para el Id: <{0}>. Error {1}", id, e);
+                return BadRequest("Ocurrio un error al eliminar la marca");
+            }
+        }
 
 
     }
