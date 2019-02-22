@@ -51,6 +51,41 @@ namespace System.Services
             _uow.ProductoRepository.Save();
         }
 
+        public ProductoViewModel GetById(int id)
+        {
+            var model = _uow.ProductoRepository.Find(x => x.ProductoId == id);
+            var producto = new ProductoViewModel()
+            {
+                ProductoId = model.ProductoId,
+                Nombre = model.Nombre,
+                CategoriaId = model.CategoriaId,
+                MarcaId = model.MarcaId,
+                BreveDescripcion = model.BreveDescripcion,
+                Cantidad = model.Cantidad,
+                Codigo = model.Codigo,
+                Estado = model.Estado,
+                Descripcion = model.Descripcion,
+                Precio = model.Precio
+            };
+            return producto;
+        }
+        public void Edit(ProductoViewModel model)
+        {
+            var producto = _uow.ProductoRepository.Find(x => x.ProductoId == model.ProductoId);
+            producto.ProductoId = model.ProductoId;
+            producto.Nombre = model.Nombre;
+            producto.CategoriaId = model.CategoriaId;
+            producto.MarcaId = model.MarcaId;
+            producto.BreveDescripcion = model.BreveDescripcion;
+            producto.Cantidad = model.Cantidad;
+            producto.Codigo = model.Codigo;
+            producto.Estado = model.Estado;
+            producto.Descripcion = model.Descripcion;
+            producto.Precio = model.Precio;
+
+            _uow.ProductoRepository.Update(producto);
+            _uow.ProductoRepository.Save();
+        }
 
     }
 }

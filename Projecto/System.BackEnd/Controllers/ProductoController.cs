@@ -51,14 +51,50 @@ namespace System.Backend.Controllers
             {
                 ProductoService productoService = new ProductoService(_logger);
                 productoService.Delete(id);
-                SetTempData("Marca Eliminada.");
-                _logger.LogInformation("Marca eliminada correctamente");
+                SetTempData("Producto Eliminado.");
+                _logger.LogInformation("Producto eliminado correctamente");
                 return RedirectToAction("Index");
             }
             catch (Exception e)
             {
-                _logger.LogError("No se pudo eliminar la marca para el Id: <{0}>. Error {1}", id, e);
-                return BadRequest("Ocurrio un error al eliminar la marca");
+                _logger.LogError("No se pudo eliminar el producto para el Id: <{0}>. Error {1}", id, e);
+                return BadRequest("Ocurrio un error al eliminar el producto");
+            }
+        }
+        public IActionResult Edit(int id)
+        {
+            try
+            {
+                ProductoService productoService = new ProductoService(_logger);        
+                var model = productoService.GetById(id);
+                MarcaService marcaService = new MarcaService(_logger);
+                ViewData["Marca"] = marcaService.GetMarcaDropDown();
+                CategoriaService categoriaService = new CategoriaService(_logger);
+                ViewData["Categoria"] = categoriaService.GetCategoriaDropDown();
+                _logger.LogInformation("Producto obtenido para el Id: <{0}>", id);
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("No se pudo obtener el producto para el Id: <{0}>", id);
+                return BadRequest("Ocurrio un error al obtener la marca");
+            }
+        }
+        [HttpPost]
+        public IActionResult Edit(ProductoViewModel modelProducto)
+        {
+            try
+            {
+                ProductoService productoService = new ProductoService(_logger);
+                productoService.Edit(modelProducto);
+                SetTempData("Producto Editado.");
+                _logger.LogInformation("Producto Editado Correctamente");
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("No se pudo editar el producto. Error <{0}>", e);
+                return BadRequest("Ocurrio un error al editar el producto");
             }
         }
 
