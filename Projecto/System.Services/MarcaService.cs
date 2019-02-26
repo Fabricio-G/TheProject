@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Entities;
@@ -68,5 +69,19 @@ namespace System.Services
         {
             return _uow.MarcaRepository.All().Any(x => x.Nombre == nombre);
         }
+        public IEnumerable<SelectListItem> GetMarcaDropDown(string selectedId = null)
+        {
+            var marca = _uow.MarcaRepository.All().OrderBy(x => x.Nombre).ToList();
+
+            var listMarca = marca.Select(x => new SelectListItem()
+            {
+                Selected = (x.MarcaId.ToString() == selectedId),
+                Text = x.Nombre,
+                Value = x.MarcaId.ToString()
+            }).OrderBy(x => x.Text);
+
+            return listMarca;
+        }
+
     }
 }
