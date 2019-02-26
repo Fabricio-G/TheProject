@@ -5,11 +5,7 @@
     var Email = User.Claims.FirstOrDefault(x => x.Type == "Usuario").Value;
     var edit = Html.ColumnTablePermission("Edit", "Productos", Email);
     var delete = Html.ColumnTablePermission("Delete", "Productos", Email);
-    ViewData["Title"] = "Marcas";
-}
-
-@{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Productos";
 }
 <header class="content__title">
     <h1>@ViewData["Title"]</h1>
