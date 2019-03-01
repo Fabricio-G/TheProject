@@ -11827,7 +11827,7 @@ textarea {
 [data-ma-theme="indigo"] .header,
 [data-ma-theme="indigo"] .login__block__header,
 [data-ma-theme="indigo"] .login__block__btn {
-  background-color: #3F51B5;
+    background-color: #ffffff;
 }
 [data-ma-theme="indigo"] .navigation__sub--active > a,
 [data-ma-theme="indigo"] .navigation__active > a,
@@ -12327,7 +12327,7 @@ textarea {
 }
 .select2-container--default .select2-selection--single .select2-selection__rendered {
   line-height: 1.25;
-  padding: 0.65rem 0.1rem;
+  padding: 1.65rem 0.1rem;
 }
 .select2-container--default.select2-container--focus .select2-selection--multiple {
   border: 0;

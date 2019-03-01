@@ -14,19 +14,18 @@
         <a href="@Url.Action("Index", "Producto")" class="actions__item zmdi zmdi-arrow-left text-danger" title="Volver"></a>
     </div>
 </header>
-@using (Html.BeginForm("Create", "Producto", FormMethod.Post, new { role = "form" }))
-{
+<form asp-action="Create" asp-controller="Producto" method="post" id="CreateProductoForm">
     <div class="card">
         <div class="card-block">
             @Html.AntiForgeryToken()
             <div class="row">
                 <div class="col-md-6">
-                    @Html.ValidationMessageFor(model => model.Nombre, null, new { @class = "text-danger" })
                     <div class="form-group form-group--float">
                         @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", tabindex = "1" })
                         <label>Nombre</label>
                         <i class="form-group__bar"></i>
                     </div>
+                    <span asp-validation-for="Nombre" id="text-nombre-error" class="text-danger"></span>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group form-group--float">
@@ -34,15 +33,17 @@
                         <label>Breve Descripcion</label>
                         <i class="form-group__bar"></i>
                     </div>
-               </div>
+                    <span asp-validation-for="BreveDescripcion" id="text-nombre-error" class="text-danger"></span>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group form-group--float">
-                        @Html.TextBoxFor(model => model.Precio, new { @class = "form-control", tabindex = "3" })
+                        @Html.TextBoxFor(model => model.Precio, new { @class = "form-control", type = "number", tabindex = "3" })
                         <label>Precio</label>
                         <i class="form-group__bar"></i>
                     </div>
+                    <span asp-validation-for="Precio" id="text-nombre-error" class="text-danger"></span>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group form-group--float">
@@ -50,29 +51,33 @@
                         <label>Codigo</label>
                         <i class="form-group__bar"></i>
                     </div>
+                    <span asp-validation-for="Codigo" id="text-nombre-error" class="text-danger"></span>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group form-group--float">
-
-                        @Html.TextBoxFor(model => model.Cantidad, new { @class = "form-control", tabindex = "5" })
+                        @Html.TextBoxFor(model => model.Cantidad, new { @class = "form-control", type = "number", tabindex = "5" })
                         <label>Cantidad</label>
                         <i class="form-group__bar"></i>
                     </div>
+                    <span asp-validation-for="Cantidad" id="text-nombre-error" class="text-danger"></span>
                 </div>
                 <div class="col-md-3">
-                    <select class="form-control select2" id="estado" name="Estado" tabindex = "6">
+                    <select class="form-control select2" id="estado" name="Estado" tabindex="6">
                         <option>Seleciona un estado</option>
                         <option value="1">EN STOCK</option>
                         <option value="0">SIN STOCK</option>
                     </select>
                 </div>
+                <span asp-validation-for="Estado" id="text-nombre-error" class="text-danger"></span>
             </div>
             <div class="row">
                 <div class="col-md-4">
                     @Html.DropDownList("MarcaId", selectMarca, "-Seleccione Marca-", new { @class = "form-control select2", tabindex = "7" })
+                    <span asp-validation-for="MarcaId" id="text-nombre-error" class="text-danger"></span>
                 </div>
                 <div class="col-md-4">
                     @Html.DropDownList("CategoriaId", selectCategoria, "-Seleccione Categoria-", new { @class = "form-control select2", tabindex = "8" })
+                    <span asp-validation-for="CategoriaId" id="text-nombre-error" class="text-danger"></span>
                 </div>
             </div>
             <div class="row">
@@ -82,31 +87,33 @@
                         <label>Descripción</label>
                         <i class="form-group__bar"></i>
                     </div>
+                    <span asp-validation-for="Descripcion" id="text-nombre-error" class="text-danger"></span>
                 </div>
             </div>
         </div>
     </div>
     <div class="row justify-content-end">
         <div class="col-auto">
-            <button type="submit" id="#submit-btn" class="btn btn-primary btn--icon-text waves-effect text-white btn-loading">
+            <button id="submit-btn" class="btn btn-primary btn--icon-text waves-effect float-right" tabindex="10">
                 <i class="zmdi zmdi-save"></i>
                 Guardar
             </button>
         </div>
     </div>
-
-}
-@section Scripts
-    {
-    <script>
-    $("#submit-btn").click(function (event) {
-        event.preventDefault();
-        if ($('form').valid()) {
-            $("#submit-btn").html("<i class='zmdi zmdi-spinner fa-spin'></i> Procesando...");
-            $("#submit-btn").addClass("disabled");
-            document.getElementById("submit-btn").style.pointerEvents = "none";
-            $('form').submit();
-        }
-      });
-    </script>
-}
+</form>
+    @section Scripts
+        {
+        <script>
+            $("#submit-btn").click(function (event) {
+                event.preventDefault();
+                alert('por entrar')
+                if ($("#CreateProductoForm").valid()) {
+                    alert('entro')
+                    $("#submit-btn").html("<i class='zmdi zmdi-spinner fa-spin'></i> Procesando...");
+                    $("#submit-btn").addClass("disabled");
+                    document.getElementById("submit-btn").style.pointerEvents = "none";
+                    $('#CreateProductoForm').submit();
+                }
+            });
+        </script>
+    }
