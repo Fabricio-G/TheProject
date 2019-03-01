@@ -40,10 +40,19 @@ namespace System.Backend.Controllers
         [HttpPost]
         public IActionResult Create(ProductoViewModel productoModel)
         {
-            ProductoService productoService = new ProductoService(_logger);
-            productoService.Create(productoModel);
-            SetTempData("Producto Creada.");
-            return RedirectToAction("Index");
+            try
+            {
+                ProductoService productoService = new ProductoService(_logger);
+                productoService.Create(productoModel);
+                SetTempData("Producto Creada.");
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("Ocurrio un error al crear el producto. Error {0}", e);
+                return BadRequest("Ocurrio un error al crear el producto");
+            }
+
         }
         public IActionResult Delete(int id)
         {
