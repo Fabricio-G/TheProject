@@ -21,6 +21,7 @@ namespace System.Entities
         IRepository<Producto> ProductoRepository { get; }
         IRepository<Categoria> CategoriaRepository { get; }
         IRepository<Marca> MarcaRepository { get; }
+        IRepository<Empleado> EmpleadoRepository { get; }
 				int Save();
 	}
 }

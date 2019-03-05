@@ -31,6 +31,7 @@ namespace System.Entities
         public DbSet<Producto> Producto { get; set; }
         public DbSet<Categoria> Categoria { get; set; }
         public DbSet<Marca> Marca { get; set; }
+        public DbSet<Empleado> Empleado { get; set; }
 		
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

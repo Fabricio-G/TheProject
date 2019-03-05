@@ -11,9 +11,10 @@ using System.Entities;
 namespace System.Entities.Migrations
 {
     [DbContext(typeof(SystemContext))]
-    partial class SystemContextModelSnapshot : ModelSnapshot
+    [Migration("20190304221300_AddTableEmpleado")]
+    partial class AddTableEmpleado
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -151,9 +152,9 @@ namespace System.Entities.Migrations
 
                     b.Property<int>("Codigo");
 
-                    b.Property<string>("Descripcion");
-
                     b.Property<string>("Estado");
+
+                    b.Property<string>("Imagen");
 
                     b.Property<int>("MarcaId");
 

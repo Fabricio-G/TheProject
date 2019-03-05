@@ -1,0 +1,101 @@
+﻿@using System.Backend.Models
+@using System.Services.Models
+@model System.Services.Models.EmpleadoViewModel
+@{
+    ViewBag.Title = "Nuevo Empleado";
+}
+<link href="~/css/rol_style.css" rel="stylesheet" />
+<header class="content__title">
+    <h1>@ViewBag.Title</h1>
+    <div class="actions">
+        <a href="@Url.Action("Index", "Empleado")" class="actions__item zmdi zmdi-arrow-left text-danger" title="Volver"></a>
+    </div>
+</header>
+<form asp-action="Create" asp-controller="Empleado" method="post" id="CreateEmpleadoForm">
+    <div class="card">
+        <div class="card-block">
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group form-group--float">
+                        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", tabindex = "1" })
+                        <label>Nombre</label>
+                        <i class="form-group__bar"></i>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Nombre, null, new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group form-group--float">
+                        @Html.TextBoxFor(model => model.Apellido, new { @class = "form-control", tabindex = "2" })
+                        <label>Apellido</label>
+                        <i class="form-group__bar"></i>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Apellido, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="form-group form-group--float">
+                        @Html.TextBoxFor(model => model.Domicilio, new { @class = "form-control", tabindex = "3" })
+                        <label>Domicilio</label>
+                        <i class="form-group__bar"></i>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Domicilio, null, new { @class = "text-danger" })
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group form-group--float">
+                        @Html.TextBoxFor(model => model.DNI, new { @class = "form-control", tabindex = "3" })
+                        <label>DNI</label>
+                        <i class="form-group__bar"></i>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.DNI, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group form-group--float">
+                        @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control", tabindex = "4" })
+                        <label>Telefono</label>
+                        <i class="form-group__bar"></i>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Telefono, null, new { @class = "text-danger" })
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group form-group--float">
+                        @Html.TextBoxFor(model => model.Sueldo, new { @class = "form-control", tabindex = "5" })
+                        <label>Sueldo</label>
+                        <i class="form-group__bar"></i>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Sueldo, null, new { @class = "text-danger" })
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group form-group--float">
+                        @Html.TextBoxFor(model => model.JornadasTrabajadas, new { @class = "form-control", tabindex = "6" })
+                        <label>Jornadas Trabajadas</label>
+                        <i class="form-group__bar"></i>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.JornadasTrabajadas, null, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-end">
+        <div class="col-auto">
+            <button id="submit-btn" class="btn btn-primary btn--icon-text waves-effect float-right" tabindex="2">
+                <i class="zmdi zmdi-save"></i>
+                Guardar
+            </button>
+        </div>
+    </div>
+</form>
+<script>
+    $("#submit-btn").click(function (event) {
+        event.preventDefault();
+        if ($("#CreateEmpleadoForm").valid()) {
+            $("#submit-btn").html("<i class='zmdi zmdi-spinner fa-spin'></i> Procesando...");
+            $("#submit-btn").addClass("disabled");
+            document.getElementById("submit-btn").style.pointerEvents = "none";
+            $("#CreateEmpleadoForm").submit();
+        }
+    });
+</script>
