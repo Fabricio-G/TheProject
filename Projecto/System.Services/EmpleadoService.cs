@@ -25,6 +25,7 @@ namespace System.Services
             {
                 empleado.Add(new EmpleadoViewModel
                 {
+                    EmpleadoId = emp.EmpleadoId,
                     Apellido = emp.Apellido,
                     DNI = emp.DNI,
                     Domicilio = emp.Domicilio,
@@ -65,6 +66,25 @@ namespace System.Services
                 Sueldo = model.Sueldo
             };
             _uow.EmpleadoRepository.Create(empleado);
+            _uow.EmpleadoRepository.Save();
+        }
+        public void Edit (EmpleadoViewModel model)
+        {
+            var empleado = _uow.EmpleadoRepository.Find(x => x.EmpleadoId == model.EmpleadoId);
+            empleado.Apellido = model.Apellido;
+            empleado.DNI = model.DNI;
+            empleado.Domicilio = model.Domicilio;
+            empleado.JornadasTrabajadas = model.JornadasTrabajadas;
+            empleado.Nombre = model.Nombre;
+            empleado.Sueldo = model.Sueldo;
+            empleado.Telefono = model.Telefono;
+            _uow.EmpleadoRepository.Update(empleado);
+            _uow.EmpleadoRepository.Save();
+        }
+        public void Delete (int id)
+        {
+            var empleado = _uow.EmpleadoRepository.Find(x => x.EmpleadoId == id);
+            _uow.EmpleadoRepository.Delete(empleado);
             _uow.EmpleadoRepository.Save();
         }
     }

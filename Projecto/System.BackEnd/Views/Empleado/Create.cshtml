@@ -44,7 +44,7 @@
                 </div>
                 <div class="col-md-5">
                     <div class="form-group form-group--float">
-                        @Html.TextBoxFor(model => model.DNI, new { @class = "form-control", tabindex = "3" })
+                        @Html.TextBoxFor(model => model.DNI, new { @class = "form-control", tabindex = "4" })
                         <label>DNI</label>
                         <i class="form-group__bar"></i>
                     </div>
@@ -54,7 +54,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group form-group--float">
-                        @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control", tabindex = "4" })
+                        @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control", tabindex = "5" })
                         <label>Telefono</label>
                         <i class="form-group__bar"></i>
                     </div>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group form-group--float">
-                        @Html.TextBoxFor(model => model.Sueldo, new { @class = "form-control", tabindex = "5" })
+                        @Html.TextBoxFor(model => model.Sueldo, new { @class = "form-control", tabindex = "6", min = "0.1", max = "50000.00", type = "number" })
                         <label>Sueldo</label>
                         <i class="form-group__bar"></i>
                     </div>
@@ -70,7 +70,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group form-group--float">
-                        @Html.TextBoxFor(model => model.JornadasTrabajadas, new { @class = "form-control", tabindex = "6" })
+                        @Html.TextBoxFor(model => model.JornadasTrabajadas, new { @class = "form-control", tabindex = "7" })
                         <label>Jornadas Trabajadas</label>
                         <i class="form-group__bar"></i>
                     </div>
@@ -81,7 +81,7 @@
     </div>
     <div class="row justify-content-end">
         <div class="col-auto">
-            <button id="submit-btn" class="btn btn-primary btn--icon-text waves-effect float-right" tabindex="2">
+            <button id="submit-btn" class="btn btn-primary btn--icon-text waves-effect float-right" tabindex="8">
                 <i class="zmdi zmdi-save"></i>
                 Guardar
             </button>
@@ -97,5 +97,28 @@
             document.getElementById("submit-btn").style.pointerEvents = "none";
             $("#CreateEmpleadoForm").submit();
         }
+    });
+    (function ($) {
+        $.fn.currencyInput = function () {
+            this.each(function () {
+                var wrapper = $("<div class='currency-input' />");
+                $(this).wrap(wrapper);
+                //$(this).before("<span class='currency-symbol'>$</span>");
+                $(this).change(function () {
+                    var min = parseFloat($(this).attr("min"));
+                    var max = parseFloat($(this).attr("max"));
+                    var value = this.valueAsNumber;
+                    if (value < min)
+                        value = min;
+                    else if (value > max)
+                        value = max;
+                    $(this).val(value.toFixed(2));
+                });
+            });
+        };
+    })(jQuery);
+
+    $(document).ready(function () {
+        $('#Sueldo').currencyInput();
     });
 </script>

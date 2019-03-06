@@ -64,12 +64,10 @@ namespace System.Services
             _uow.CategoriaRepository.Delete(categoria);
             _uow.CategoriaRepository.Save();
         }
-<<<<<<< HEAD
         public bool ValidarCategoria (string nombre)
         {
             return _uow.CategoriaRepository.All().Any(x => x.Nombre == nombre);
         }
-=======
         public IEnumerable<SelectListItem> GetCategoriaDropDown(string selectedId = null)
         {
             var categoria = _uow.CategoriaRepository.All().OrderBy(x => x.Nombre).ToList();
@@ -83,7 +81,5 @@ namespace System.Services
 
             return listCategoria;
         }
-
->>>>>>> feature/2-producto
     }
 }

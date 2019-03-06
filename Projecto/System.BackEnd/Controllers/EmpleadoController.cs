@@ -50,5 +50,40 @@ namespace System.Backend.Controllers
             var model = empleadoService.GetById(Id);
             return View(model);
         }
+        [HttpPost]
+        public IActionResult Edit (EmpleadoViewModel model)
+        {
+            try
+            {
+                EmpleadoService empleadoService = new EmpleadoService(_logger);
+                empleadoService.Edit(model);
+                _logger.LogInformation("Empleado Editado");
+                SetTempData("Empleado editado correctamente", "success");
+                return RedirectToAction("Index");
+            }
+            catch(Exception e)
+            {
+                _logger.LogError("Ocurrio un error al editar el empleado. Error: {0}", e);
+                SetTempData("Ocurrio un error al intetar editar el empleado", "error");
+                return RedirectToAction("Index");
+            }
+        }
+        public IActionResult Delete (int Id)
+        {
+            try
+            {
+                EmpleadoService empleadoService = new EmpleadoService(_logger);
+                empleadoService.Delete(Id);
+                _logger.LogInformation("Empleado eliminado");
+                SetTempData("Empleado eliminado");
+                return RedirectToAction("Index");
+            }
+            catch(Exception e)
+            {
+                _logger.LogError("Ocurrio un error al eliminar el empleado. Error: {0}", e);
+                SetTempData("Ocurrio un error al eliminar el empleado", "error");
+                return RedirectToAction("Index");
+            }
+        }
     }
 }
