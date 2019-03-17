@@ -170,6 +170,18 @@ namespace System.Entities
                 return marcaRepository;
             }
         }
+        private Repository<Empleado> empleadoRepository;
+        public IRepository<Empleado> EmpleadoRepository
+        {
+            get
+            {
+                if (this.empleadoRepository == null)
+                {
+                    this.empleadoRepository = new Repository<Empleado>(context);
+                }
+                return empleadoRepository;
+            }
+        }
         public int Save()
 		{
 			return context.SaveChanges();
