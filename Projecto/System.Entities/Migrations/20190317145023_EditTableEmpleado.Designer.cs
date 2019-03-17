@@ -11,9 +11,10 @@ using System.Entities;
 namespace System.Entities.Migrations
 {
     [DbContext(typeof(SystemContext))]
-    partial class SystemContextModelSnapshot : ModelSnapshot
+    [Migration("20190317145023_EditTableEmpleado")]
+    partial class EditTableEmpleado
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,7 +84,7 @@ namespace System.Entities.Migrations
 
                     b.Property<decimal>("Sueldo");
 
-                    b.Property<string>("Telefono");
+                    b.Property<int>("Telefono");
 
                     b.HasKey("EmpleadoId");
 

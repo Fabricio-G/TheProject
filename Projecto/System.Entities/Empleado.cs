@@ -12,8 +12,8 @@ namespace System.Entities
         public string Apellido { get; set; }
         public string Domicilio { get; set; }
         public int DNI { get; set; }
-        public int Telefono { get; set; }
-        public int Sueldo { get; set; }
+        public string Telefono { get; set; }
+        public decimal Sueldo { get; set; }
         public string JornadasTrabajadas { get; set; }
     }
 }

@@ -17,8 +17,8 @@ namespace System.Services.Models
         [Required(ErrorMessage = "El campo DNI es obligatorio")]
         public int DNI { get; set; }
         [Required(ErrorMessage = "El campo Telefono es obligatorio")]
-        public int Telefono { get; set; }
-        public int Sueldo { get; set; }
+        public string Telefono { get; set; }
+        public decimal Sueldo { get; set; }
         public string JornadasTrabajadas { get; set; }
     }
 }
