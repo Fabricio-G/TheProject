@@ -56,7 +56,6 @@
     $("#submit-btn").click(function (event) {
         event.preventDefault();
         if ($("#CreateMarcaForm").valid() && !exist) {
-            alert(existMarca)
             $("#submit-btn").html("<i class='zmdi zmdi-spinner fa-spin'></i> Procesando...");
             $("#submit-btn").addClass("disabled");
             document.getElementById("submit-btn").style.pointerEvents = "none";

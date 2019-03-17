@@ -17,13 +17,13 @@ namespace System.Services
             _logger = logger;
         }
 
-        public List<ProductoModel> GetAll()
+        public List<ProductoViewModel> GetAll()
         {
             var model = _uow.ProductoRepository.All();
-            var producto = new List<ProductoModel>();
+            var producto = new List<ProductoViewModel>();
             foreach (var value in model)
             {
-                producto.Add(new ProductoModel { ProductoId = value.ProductoId, Nombre = value.Nombre, BreveDescripcion = value.BreveDescripcion, Precio = value.Precio, Estado =value.Estado });
+                producto.Add(new ProductoViewModel { ProductoId = value.ProductoId, Nombre = value.Nombre, BreveDescripcion = value.BreveDescripcion, Precio = value.Precio, Estado =value.Estado });
             }
             return producto;
         }
