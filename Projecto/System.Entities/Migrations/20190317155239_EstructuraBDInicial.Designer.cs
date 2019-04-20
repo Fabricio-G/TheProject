@@ -11,8 +11,8 @@ using System.Entities;
 namespace System.Entities.Migrations
 {
     [DbContext(typeof(SystemContext))]
-    [Migration("20190304221300_AddTableEmpleado")]
-    partial class AddTableEmpleado
+    [Migration("20190317155239_EstructuraBDInicial")]
+    partial class EstructuraBDInicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -82,9 +82,9 @@ namespace System.Entities.Migrations
 
                     b.Property<string>("Nombre");
 
-                    b.Property<int>("Sueldo");
+                    b.Property<decimal>("Sueldo");
 
-                    b.Property<int>("Telefono");
+                    b.Property<string>("Telefono");
 
                     b.HasKey("EmpleadoId");
 
@@ -152,9 +152,9 @@ namespace System.Entities.Migrations
 
                     b.Property<int>("Codigo");
 
-                    b.Property<string>("Estado");
+                    b.Property<string>("Descripcion");
 
-                    b.Property<string>("Imagen");
+                    b.Property<string>("Estado");
 
                     b.Property<int>("MarcaId");
 
