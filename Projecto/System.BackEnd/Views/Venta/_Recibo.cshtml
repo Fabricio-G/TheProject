@@ -1,0 +1,64 @@
+﻿@model System.Services.Models.VentaViewModel
+<div class="card" id="recibo">
+    <div class="card-block">
+        <div class="row">
+            <table border="1" align="center" bordercolor="gray" width="320" height="450">
+                <tr>
+                    <td align="center">
+                        <div style="font-size: xx-large;">
+                            <span><b>Recibo de Pago</b></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <span><b>Fecha</b></span><br />
+                                <span><b></b></span>
+                            </div>
+                            <div class="col-md-4">
+                                <span><b>Hora</b></span><br />
+                                <span><b></b></span>
+                            </div>
+                            <div class="col-md-4">
+                                <span><b>Nro. Trans.</b></span><br />
+                                <span><b></b></span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span>Descripción</span>
+                            </div>
+                            <div class="col-md-6">
+                                <span>Importe:</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6" id="descripcion">
+                            </div>
+                            <div class="col-md-6" id="importe">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <br />
+                        <div>
+                            <span>COMPROBANTE DE PAGO VÁLIDO</span><br />
+                            <span>CONSÉRVELO</span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div align="center">
+        <button id="imprimir" onclick="ImprimirQR()" class="btn btn-primary btn-lg"><i class="zmdi zmdi-print"></i> Imprimir</button>
+    </div><br />
+</div>
