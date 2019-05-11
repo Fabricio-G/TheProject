@@ -29,7 +29,6 @@
     <link href="~/template/lightgallery/css/lightgallery.css" rel="stylesheet" />
     <link href="~/template/css/app.css" rel="stylesheet" />
     <link href="~/css/site.css" rel="stylesheet" />
-    <link href="~/manifest.json" rel="manifest">
 
     <style>
         .modal-header {
@@ -54,75 +53,84 @@
             margin-top: -13px;
         }
 
-            .close:hover {
-                color: #f8f5f5;
-            }
+        .close:hover {
+            color: #f8f5f5;
+        }
+        a.navbar-link:focus, a.navbar-link:hover {
+            color: #020202 !important;
+            text-decoration: none;
+            font-weight: 800;
+        }
+        .navbar-link {
+            font-size: 18px;
+            color: #0e0e0e;
+        }
     </style>
 </head>
 
 <body data-ma-theme="indigo">
-<main class="main">
-    <script src="~/template/jquery/dist/jquery.min.js"></script>
+    <main class="main">
+        <script src="~/template/jquery/dist/jquery.min.js"></script>
 
-    @Html.Partial("_NavBar")
+        @Html.Partial("_NavBar")
 
 
-    @Html.Partial("_SideBar")
+        @Html.Partial("_SideBar")
 
-    <section class="content">
-        <div class="page-loader">
-            <div class="page-loader__spinner">
-                <svg viewBox="25 25 50 50">
-                    <circle cx="50" cy="50" r="20" fill="none" stroke-width="4" stroke-miterlimit="10"></circle>
-                </svg>
+        <section class="content">
+            <div class="page-loader">
+                <div class="page-loader__spinner">
+                    <svg viewBox="25 25 50 50">
+                        <circle cx="50" cy="50" r="20" fill="none" stroke-width="4" stroke-miterlimit="10"></circle>
+                    </svg>
+                </div>
             </div>
-        </div>
-        @RenderBody()
-    </section>
-</main>
+            @RenderBody()
+        </section>
+    </main>
 
-<script src="~/template/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
-<script src="~/lib/jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
-<script defer src="~/lib/font-awesome-js/js/fontawesome-all.min.js"></script>
-<!-- Template Scripts -->
-<script src="~/template/tether/dist/js/tether.min.js"></script>
-<script src="~/template/popper/js/popper.min.js"></script>
-<script src="~/template/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="~/template/Waves/dist/waves.min.js"></script>
-<script src="~/template/jquery.scrollbar/jquery.scrollbar.min.js"></script>
-<script src="~/template/jquery-scrollLock/jquery-scrollLock.min.js"></script>
-<script src="~/template/autosize/dist/autosize.js"></script>
-<script src="~/template/flot/jquery.flot.js"></script>
-<script src="~/template/flot/jquery.flot.resize.js"></script>
-<script src="~/template/salvattore/dist/salvattore.min.js"></script>
-<script src="~/template/jquery.sparkline/jquery.sparkline.min.js"></script>
-<script src="~/template/sweetalert2/dist/sweetalert2.js"></script>
-<script src="~/template/select2/select2.full.min.js"></script>
-<script src="~/js/MvcLookup/mvc-lookup.js"></script>
-<script src="~/js/MvcGrid/mvc-grid.js"></script>
-<script src="~/js/Notify/boostrap-notify.min.js" rel="stylesheet"></script>
-<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-<script src="~/lib/chosen/chosen.jquery.js" async></script>
-<script src="~/lib/chosen/chosen.proto.min.js"></script>
-<script src="~/lib/rangeSlider/ion.rangeSlider.js"></script>
-<script src="~/lib/multi-select/bootstrap-multiselect.js"></script>
-<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
-<script src="~/template/js/flatpickr.min.js"></script>
-<script src="~/js/PrettyJson/underscore-min.js"></script>
-<script src="~/js/PrettyJson/backbone-min.js"></script>
-<script src="~/js/PrettyJson/pretty-json-min.js"></script>
-<script src="~/lib/SweetAlert2IE/polyfill.js"></script>
+    <script src="~/template/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/lib/jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
+    <script defer src="~/lib/font-awesome-js/js/fontawesome-all.min.js"></script>
+    <!-- Template Scripts -->
+    <script src="~/template/tether/dist/js/tether.min.js"></script>
+    <script src="~/template/popper/js/popper.min.js"></script>
+    <script src="~/template/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/template/Waves/dist/waves.min.js"></script>
+    <script src="~/template/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+    <script src="~/template/jquery-scrollLock/jquery-scrollLock.min.js"></script>
+    <script src="~/template/autosize/dist/autosize.js"></script>
+    <script src="~/template/flot/jquery.flot.js"></script>
+    <script src="~/template/flot/jquery.flot.resize.js"></script>
+    <script src="~/template/salvattore/dist/salvattore.min.js"></script>
+    <script src="~/template/jquery.sparkline/jquery.sparkline.min.js"></script>
+    <script src="~/template/sweetalert2/dist/sweetalert2.js"></script>
+    <script src="~/template/select2/select2.full.min.js"></script>
+    <script src="~/js/MvcLookup/mvc-lookup.js"></script>
+    <script src="~/js/MvcGrid/mvc-grid.js"></script>
+    <script src="~/js/Notify/boostrap-notify.min.js" rel="stylesheet"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/chosen/chosen.jquery.js" async></script>
+    <script src="~/lib/chosen/chosen.proto.min.js"></script>
+    <script src="~/lib/rangeSlider/ion.rangeSlider.js"></script>
+    <script src="~/lib/multi-select/bootstrap-multiselect.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/template/js/flatpickr.min.js"></script>
+    <script src="~/js/PrettyJson/underscore-min.js"></script>
+    <script src="~/js/PrettyJson/backbone-min.js"></script>
+    <script src="~/js/PrettyJson/pretty-json-min.js"></script>
+    <script src="~/lib/SweetAlert2IE/polyfill.js"></script>
+    <script type="text/JavaScript" src="~/js/jquery.print/jQuery.print.min.js"></script>
+    <script src="~/js/site.min.js"></script>
 
-<script src="~/js/site.min.js"></script>
+    <script>
+        $('.mvc-grid').mvcgrid();
+    </script>
 
-<script>
-    $('.mvc-grid').mvcgrid();
-</script>
+    <script src="~/js/app.utils.js"></script>
+    <script src="~/js/app.min.js"></script>
 
-<script src="~/js/app.utils.js"></script>
-<script src="~/js/app.min.js"></script>
-
-<script>
+    <script>
 
     $('[title]').tooltip();
 
@@ -221,38 +229,38 @@
         nError("Error al intentar confirmar la solicitud de Devolución.");
     }
 
-</script>
+    </script>
 
-<div class="modal fade bd-example-modal-lg" id="ConfirmarDevolucionModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="title" id="LargeModalTitle"></h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">X</span>
-                </button>
-            </div>
-            <div class="modal-body" id="ConfirmarDevolucion">
+    <div class="modal fade bd-example-modal-lg" id="ConfirmarDevolucionModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="title" id="LargeModalTitle"></h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">X</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="ConfirmarDevolucion">
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="modal fade bd-example-modal-lg" id="VerDetalleModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="title" id="LargeModalTitle"></h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">X</span>
-                </button>
-            </div>
-            <div class="modal-body" id="VerDetalle">
+    <div class="modal fade bd-example-modal-lg" id="VerDetalleModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="title" id="LargeModalTitle"></h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">X</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="VerDetalle">
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-@RenderSection("Scripts", required: false)
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

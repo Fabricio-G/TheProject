@@ -8,13 +8,9 @@
 
   <ItemGroup>
     <Compile Remove="Views\NewFolder1\**" />
-    <Compile Remove="Views\NewFolder\**" />
     <Content Remove="Views\NewFolder1\**" />
-    <Content Remove="Views\NewFolder\**" />
     <EmbeddedResource Remove="Views\NewFolder1\**" />
-    <EmbeddedResource Remove="Views\NewFolder\**" />
     <None Remove="Views\NewFolder1\**" />
-    <None Remove="Views\NewFolder\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -66,9 +62,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="manifest.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Update="wwwroot\js\Highcharts\exporting.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

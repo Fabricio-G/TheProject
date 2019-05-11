@@ -7,13 +7,6 @@
   <ItemGroup>
     <Compile Remove="Class1.cs" />
     <Compile Remove="ComercioRol.cs" />
-    <Compile Remove="Migrations\20181119174725_AddNewColumInUsuario.cs" />
-    <Compile Remove="Migrations\20181119174725_AddNewColumInUsuario.Designer.cs" />
-    <Compile Remove="Migrations\20190122021811_CreateNewTableProductos-Marcas-Categorias.cs" />
-    <Compile Remove="Migrations\20190122021811_CreateNewTableProductos-Marcas-Categorias.Designer.cs" />
-    <Compile Remove="Migrations\20190131212634_UpdateTableProducto.cs" />
-    <Compile Remove="Migrations\20190131212634_UpdateTableProducto.Designer.cs" />
-    <Compile Remove="Migrations\20190307150427_SeederPermisos.cs" />
   </ItemGroup>
 
   <ItemGroup>

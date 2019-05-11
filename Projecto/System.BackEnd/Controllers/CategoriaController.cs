@@ -31,6 +31,14 @@ namespace System.Backend.Controllers
                 return BadRequest("Ocurrio un error al obtener el listado de categorias");
             }
         }
+        [HttpGet]
+        public async Task<IActionResult> GridCategorias(string nombre = null)
+        {
+            CategoriaService categoriaService = new CategoriaService(_logger);
+            var model = new List<CategoriaViewModel>();
+            await Task.Run(() => model = categoriaService.GetAll(nombre));
+            return PartialView("_GridIndex", model);
+        }
 
         public IActionResult Create()
         {
