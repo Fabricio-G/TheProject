@@ -17,10 +17,22 @@ namespace System.Services
         {
             _logger = logger;
         }
-        public List<EmpleadoViewModel> GetAll()
+        public List<EmpleadoViewModel> GetAll(string nombre = null, string apellido = null, string dni = null)
         {
             var model = _uow.EmpleadoRepository.All();
             var empleado = new List<EmpleadoViewModel>();
+            if (!string.IsNullOrEmpty(nombre))
+            {
+                model = model.Where(x => x.Nombre == nombre);
+            }
+            if (!string.IsNullOrEmpty(apellido))
+            {
+                model = model.Where(x => x.Apellido == apellido);
+            }
+            if (!string.IsNullOrEmpty(dni))
+            {
+                model = model.Where(x => x.DNI == int.Parse(dni));
+            }
             foreach (var emp in model)
             {
                 empleado.Add(new EmpleadoViewModel

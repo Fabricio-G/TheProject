@@ -31,7 +31,14 @@ namespace System.Backend.Controllers
                 return BadRequest("Ocurrio un error al obtener el listado de marcas");
             }
         }
-
+        [HttpGet]
+        public async Task<IActionResult> GridMarca(string nombre = null, string apellido = null, string dni = null)
+        {
+            MarcaService empleadoService = new MarcaService(_logger);
+            var model = new List<MarcaViewModel>();
+            await Task.Run(() => model = empleadoService.GetAll(nombre));
+            return PartialView("_GridIndex", model);
+        }
         public IActionResult Create()
         {
             return View();

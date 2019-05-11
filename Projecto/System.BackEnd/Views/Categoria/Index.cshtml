@@ -5,15 +5,7 @@
     var Email = User.Claims.FirstOrDefault(x => x.Type == "Usuario").Value;
     var edit = Html.ColumnTablePermission("Edit", "Categoria", Email);
     var delete = Html.ColumnTablePermission("Delete", "Categoria", Email);
-    ViewData["Title"] = "Categorias";
 }
-<style>
-    .loader-table {
-        width: 100%;
-        position: initial;
-        opacity: 0.5;
-    }
-</style>
 <header class="content__title">
     <h1>@ViewData["Title"]</h1>
     <div class="actions">

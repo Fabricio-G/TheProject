@@ -19,10 +19,14 @@ namespace System.Services
             _logger = logger;
         }
 
-        public List<MarcaViewModel> GetAll()
+        public List<MarcaViewModel> GetAll(string nombre = null)
         {
             var model = _uow.MarcaRepository.All();
             var marca = new List<MarcaViewModel>();
+            if (!string.IsNullOrEmpty(nombre))
+            {
+                model = model.Where(x => x.Nombre == nombre);
+            }
             foreach (var value in model)
             {
                 marca.Add(new MarcaViewModel { MarcaId = value.MarcaId, Nombre = value.Nombre });

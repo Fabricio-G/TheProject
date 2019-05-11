@@ -26,7 +26,14 @@ namespace System.Backend.Controllers
             ProductoService productoService = new ProductoService(_logger);
             var model = productoService.GetAll();
             return View(model);
-
+        }
+        [HttpGet]
+        public async Task<IActionResult> GridProductos(string nombre = null, string estado = null)
+        {
+            ProductoService productoService = new ProductoService(_logger);
+            var model = new List<ProductoViewModel>();
+            await Task.Run(() => model = productoService.GetAll(nombre, estado));
+            return PartialView("_GridIndex", model);
         }
         public IActionResult Create()
         {
