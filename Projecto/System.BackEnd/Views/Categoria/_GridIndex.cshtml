@@ -1,0 +1,19 @@
+﻿@model IEnumerable<System.Services.Models.CategoriaViewModel>
+
+@{
+    var Email = User.Claims.FirstOrDefault(x => x.Type == "Usuario").Value;
+    var edit = Html.ColumnTablePermission("Edit", "Categoria", Email);
+    var delete = Html.ColumnTablePermission("Delete", "Categoria", Email);
+    ViewData["Title"] = "Categorias";
+}
+@(Html.Grid(Model)
+            .Build(columns =>
+            {
+                columns.Add(m => m.CategoriaId).Titled("N°");
+                columns.Add(m => m.Nombre).Titled("Nombre");
+                columns.Add(m => Html.ActionLink("", "Edit", "Categoria", new { Id = m.CategoriaId }, new { @class = "zmdi zmdi-edit text-warning", @title = "Editar" })).Css("action-cell " + edit).Titled("Editar");
+                columns.Add(m => Html.ActionLink("", "Delete", "Categoria", new { Id = m.CategoriaId }, new { @class = "zmdi zmdi-delete text-danger swal-delete", @title = "Eliminar" })).Css("action-cell " + delete).Titled("Eliminar");
+            })
+            .Empty("No se encontró ningún registro")
+            .Css("table table-hover")
+)

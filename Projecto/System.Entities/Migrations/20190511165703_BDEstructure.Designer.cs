@@ -11,8 +11,8 @@ using System.Entities;
 namespace System.Entities.Migrations
 {
     [DbContext(typeof(SystemContext))]
-    [Migration("20190307174530_SeederUsuario")]
-    partial class SeederUsuario
+    [Migration("20190511165703_BDEstructure")]
+    partial class BDEstructure
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -65,6 +65,30 @@ namespace System.Entities.Migrations
                     b.HasKey("CategoriaId");
 
                     b.ToTable("Categoria");
+                });
+
+            modelBuilder.Entity("System.Entities.Empleado", b =>
+                {
+                    b.Property<int>("EmpleadoId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Apellido");
+
+                    b.Property<int>("DNI");
+
+                    b.Property<string>("Domicilio");
+
+                    b.Property<string>("JornadasTrabajadas");
+
+                    b.Property<string>("Nombre");
+
+                    b.Property<decimal>("Sueldo");
+
+                    b.Property<string>("Telefono");
+
+                    b.HasKey("EmpleadoId");
+
+                    b.ToTable("Empleado");
                 });
 
             modelBuilder.Entity("System.Entities.Marca", b =>

@@ -19,10 +19,14 @@ namespace System.Services
             _logger = logger;
         }
 
-        public List<CategoriaViewModel> GetAll()
+        public List<CategoriaViewModel> GetAll(string nombre = null)
         {
             var model = _uow.CategoriaRepository.All();
             var categoria = new List<CategoriaViewModel>();
+            if (!string.IsNullOrEmpty(nombre))
+            {
+                model = model.Where(x => x.Nombre == nombre);
+            }
             foreach (var cat in model)
             {
                 categoria.Add(new CategoriaViewModel { CategoriaId = cat.CategoriaId, Nombre = cat.Nombre });

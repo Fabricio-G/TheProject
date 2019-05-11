@@ -99,7 +99,6 @@
 
   <meta name="u2f-support" content="true">
 
-<link rel="manifest" href="/manifest.json" crossOrigin="use-credentials">
 
   </head>
 
