@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Entities;
+using System.Linq;
 using System.Services.Models;
 using System.Text;
 
@@ -17,10 +18,18 @@ namespace System.Services
             _logger = logger;
         }
 
-        public List<ProductoViewModel> GetAll()
+        public List<ProductoViewModel> GetAll(string nombre = null, string estado = null)
         {
             var model = _uow.ProductoRepository.All();
             var producto = new List<ProductoViewModel>();
+            if (!string.IsNullOrEmpty(nombre))
+            {
+                model = model.Where(x => x.Nombre == nombre);
+            }
+            if (!string.IsNullOrEmpty(estado) || estado == "null")
+            {
+                model = model.Where(x => x.Estado == estado);
+            }
             foreach (var value in model)
             {
                 producto.Add(new ProductoViewModel { ProductoId = value.ProductoId, Nombre = value.Nombre, BreveDescripcion = value.BreveDescripcion, Precio = value.Precio, Estado =value.Estado });

@@ -22,6 +22,14 @@ namespace System.Backend.Controllers
             var empleado = empleadoService.GetAll();
             return View(empleado);
         }
+        [HttpGet]
+        public async Task<IActionResult> GridEmpleados(string nombre = null, string apellido = null, string dni = null)
+        {
+            EmpleadoService empleadoService = new EmpleadoService(_logger);
+            var model = new List<EmpleadoViewModel>();
+            await Task.Run(() => model = empleadoService.GetAll(nombre, apellido, dni));
+            return PartialView("_GridIndex", model);
+        }
         public IActionResult Create()
         {
             return View();
