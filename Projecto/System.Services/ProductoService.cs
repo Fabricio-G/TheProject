@@ -96,5 +96,47 @@ namespace System.Services
             _uow.ProductoRepository.Save();
         }
 
+        public DashboardViewModel DatosDashboard()
+        {
+            var prodXAgotar = _uow.ProductoRepository.Filter(x => x.Cantidad <= 2).Select(x => x.Nombre);
+            var prodSinStock = _uow.ProductoRepository.Filter(x => x.Estado == "0").Select(x => x.Nombre);
+            var categorias = _uow.CategoriaRepository.All();
+            var categoriasList = new List<DashboardViewModel.CategoriaModel>();
+            foreach (var cat in categorias)
+            {
+                var category = _uow.ProductoRepository.Filter(x => x.CategoriaId == cat.CategoriaId);
+                if (category.Any())
+                {
+                    categoriasList.Add(new DashboardViewModel.CategoriaModel()
+                    {
+                        Nombre = category.FirstOrDefault().Nombre,
+                        Cantidad = category.Count()
+                    });
+                }
+            }
+            var marcasList = new List<DashboardViewModel.MarcaModel>();
+            var marcas = _uow.MarcaRepository.All();
+            foreach ( var mar in marcas)
+            {
+                var marca = _uow.ProductoRepository.Filter(x => x.MarcaId == mar.MarcaId);
+                if (marca.Any())
+                {
+                    marcasList.Add(new DashboardViewModel.MarcaModel()
+                    {
+                        Nombre = marca.FirstOrDefault().Nombre,
+                        Cantidad = marca.Count()
+                    });
+                }
+            }
+
+            var model = new DashboardViewModel()
+            {
+                ProductosPorAgotar = prodXAgotar.ToList(),
+                ProductosSinStock = prodSinStock.ToList(),
+                Categorias = categoriasList,
+                Marcas = marcasList
+            };
+            return model;
+        }
     }
 }

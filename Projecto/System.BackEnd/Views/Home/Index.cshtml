@@ -1,43 +1,67 @@
-﻿@{
+﻿@model System.Services.Models.DashboardViewModel
+@{
     ViewBag.Title = "Dashboard";
 }
-<style>
-    .alert-warning{
-        color: black;
-    }
-</style>
-<div class="main-container" id="main-container">
-    <div>
-        <div class="main-content" style="margin:0">
-            <div class="page-content">
+<div class="row quick-stats">
+    <div class="col-md-6">
+        <div class="quick-stats__item bg-green">
+            <div class="quick-stats__info">
+                <small>Categorias Mas Utilizadas</small>
+                @foreach (var cate in Model.Categorias.OrderBy(x => x.Cantidad))
+                {
+                    <h2>@cate.Nombre (@cate.Cantidad)</h2>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="quick-stats__item bg-orange">
+            <div class="quick-stats__info">
+                <small>Marcas Mas Utilizadas</small>
+                @foreach (var marc in Model.Marcas)
+                {
+                    <h2>@marc.Nombre (@marc.Cantidad)</h2>
+                }
             </div>
         </div>
     </div>
 </div>
-
-@section Scripts
-    {
-    <script src="~/js/Highcharts/highcharts.js"></script>
-    <script src="~/js/Highcharts/exporting.js"></script>
-    <script type="text/javascript">
-        //Get all new videos and prepend them to the table
-        jQuery(function ($) {
-
-            function tooltip_placement(context, source) {
-                var $source = $(source);
-                var $parent = $source.closest('.tab-content')
-                var off1 = $parent.offset();
-                var w1 = $parent.width();
-
-                var off2 = $source.offset();
-                var w2 = $source.width();
-
-                if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2)) return 'right';
-                return 'left';
-            }
-
-        })
-    </script>
-
-}
+<div class="row quick-stats">
+    <div class="col-md-6">
+        <div class="quick-stats__item bg-red">
+            <div class="quick-stats__info">
+                <small>Productos Sin Stock</small>
+                @if (Model.ProductosSinStock.Count() > 0)
+                {
+                    @foreach (var prod in Model.ProductosSinStock)
+                    {
+                        <h2>@prod</h2>
+                    }
+                }
+                else
+                {
+                    <h2>No hay productos sin stock</h2>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="quick-stats__item bg-red">
+            <div class="quick-stats__info">
+                <small>Productos por agotar</small>
+                @if (Model.ProductosPorAgotar.Count > 0)
+                {
+                    @foreach (var prod in Model.ProductosPorAgotar)
+                    {
+                        <h2>@prod</h2>
+                    }
+                }
+                else
+                {
+                    <h2>No hay productos por agotar</h2>
+                }
+            </div>
+        </div>
+    </div>
+</div>
 

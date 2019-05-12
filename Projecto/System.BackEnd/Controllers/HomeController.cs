@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Backend.Models;
 using System.Helper;
+using System.Services;
 
 namespace System.Backend.Controllers
 {
@@ -20,8 +21,10 @@ namespace System.Backend.Controllers
         }
         public IActionResult Index()
         {
+            ProductoService productoService = new ProductoService(_logger);
+            var model = productoService.DatosDashboard();
             ViewData["AppTitle"] = Parametro.GetValue("AppTitle").ToString();
-            return View();
+            return View(model);
         }
 
         public IActionResult About()
