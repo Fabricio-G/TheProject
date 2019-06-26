@@ -19,5 +19,7 @@ namespace System.Entities
         public string Email { set; get; }
         [JsonIgnore]
         public virtual ICollection<UsuarioRol> UsuarioRoles { get; } = new List<UsuarioRol>();
+        [JsonIgnore]
+        public virtual ICollection<UsuarioToken> UsuarioToken { get; }
     }
 }

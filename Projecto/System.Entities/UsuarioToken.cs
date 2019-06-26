@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Entities.Repository.Interface;
+using Newtonsoft.Json;
 
 namespace System.Entities
 {
@@ -12,5 +13,7 @@ namespace System.Entities
         public int UsuarioId { set; get; }
         public bool Usado { set; get; }
         public DateTime FechaExpiracion { set; get; }
+        [JsonIgnore]
+        public virtual Usuario Usuario { get; }
     }
 }
