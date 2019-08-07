@@ -20,18 +20,20 @@
                     <div class="col-lg-4 col-md-12">
                         <div class="form-group">
                             <label for="numTran-filtro">Nombre</label>
-                            <input type="text" placeholder="Ej.: Luis..." id="Nombre" name="Nombre" class="form-control input-filtro" required pattern="^([a-zA-Z\u00C0-\u017F]+[,.]?[ ]?|[a-zA-Z\u00C0-\u017F]+)+$" />
+                            <input type="text" placeholder="Ej.: Memorias..." id="Nombre" name="Nombre" class="form-control input-filtro" required pattern="^([a-zA-Z\u00C0-\u017F]+[,.]?[ ]?|[a-zA-Z\u00C0-\u017F]+)+$" />
                             <i class="form-group__bar"></i>
                             @Html.Hidden("nombre")
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-12">
                         <div class="form-group">
-                            <select class="form-control select2" id="Estado" name="Estado">
-                                <option value="">Seleciona un estado</option>
-                                <option value="1">EN STOCK</option>
-                                <option value="0">SIN STOCK</option>
-                            </select>
+                            <div class="form-group">
+                                <select class="form-control select2" id="Estado" name="Estado">
+                                    <option value="">Seleciona un estado</option>
+                                    <option value="1">EN STOCK</option>
+                                    <option value="0">SIN STOCK</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
